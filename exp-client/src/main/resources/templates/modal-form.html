@@ -1,0 +1,45 @@
+<div class="modal-header">
+	<h3>{{formAction}} Transaction</h3>
+</div>
+<form name="form.transactionDetailsForm" ng-submit="submitForm()">
+	<div class="modal-body">
+		<div class="form-group">
+			<label class="control-label col-sm-3">Description</label><input
+				type="text" name="description" ng-model="description"
+				placeholder="Enter transaction description" ng-required="true"
+				 />
+			<div ng-messages="form.transactionDetailsForm.description.$error"
+				ng-if="orm.transactionDetailsForm.$dirty" style="color: maroon"
+				role="alert">
+				<div ng-message="required">Please enter description</div>
+				<div ng-message="minlength">Description is too short</div>
+				<div ng-message="maxlength">Description is too long</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-3">Type</label><select ng-model="type" ng-required="true">
+				<option class="optionset" selected="selected" value="EXPENSE">EXPENSE</option>
+				<option class="optionset" value="INCOME">INCOME</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-3">Date</label><input type="date" ng-model="date"
+				ng-required="true" min="2012-01-01"
+				max="{{today | date: 'yyyy-MM-dd' }}" />
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-3">Amount</label><input type="number" ng-model="amount"
+				placeholder="0.00" ng-required="true" />
+		</div>
+		<br />
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary"
+			ng-disabled="form.transactionDetailsForm.$invalid">Save</button>
+		<button ng-show="showDeleteBtn" type="button" class="btn btn-danger"
+			ng-click="deleteTransaction()">Delete</button>
+		<button type="button" class="btn btn-warning" ng-click="close()">Cancel</button>
+	</div>
+</form>

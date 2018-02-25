@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="/js/anglib/angular.min.js"></script>
+<script src="/js/anglib/angular-messages.js"></script>
+<script src="/js/anglib/ui-bootstrap-tpls.min.js"></script>
+<script src="/js/zingchart/zingchart.min.js"></script>
+<script src="/js/zingchart/zingchart-angularjs.js"></script>
+<script src="/js/expmgr.js"></script>
+<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/expmgr.css" />
+<title>Expense Manager</title>
+</head>
+<body ng-app="expmgr" ng-controller="expmgrCtrl">
+	<div>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Expense Manager</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container-fluid">
+			<div class="jumbotron">
+				<div class="noTransactions" ng-show="!transactions.length">
+				<h5>No transactions exist. Please click 'Add Transaction' to add new transaction.</h5>
+							<button type="button" class="btn btn-default btn-md"
+							id="addtransaction" data-toggle="modal"
+							data-target="#transactiondetails"
+							ng-click="showTransactionForm()">Add Transaction</button>
+				</div>
+				<div class="row" ng-hide="!transactions.length">
+					<div class="col-sm-6">
+						<h4>Transaction Details</h4>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th ng-hide='true'>TransactionId</th>
+									<th>Description</th>
+									<th>Type</th>
+									<th>Date</th>
+									<th>Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="transaction in transactions"
+									ng-dblclick="showTransactionForm(transaction)"
+									tooltip-placement="bottom"
+									uib-tooltip="Double click to edit or delete transaction!">
+									<!-- <td ng-hide='true'>{{tran.id}}</td> -->
+									<td>{{ transaction.description }}</td>
+									<td>{{ transaction.type }}</td>
+									<td>{{ transaction.date | date }}</td>
+									<td>{{ transaction.amount | currency}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<button type="button" class="btn btn-default btn-md"
+							id="addtransaction" data-toggle="modal"
+							data-target="#transactiondetails"
+							ng-click="showTransactionForm()">Add Transaction</button>
+					</div>
+					<div class="col-sm-6">
+						<h4>Transaction Summary</h4>
+
+						<zingchart id="expChart" zc-json="graphTransactions"
+							zc-height="450" zc-width="500"></zingchart>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="footer">Copyright © Shweta Kulkarni</div>
+</body>
+</html>
