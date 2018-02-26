@@ -1,0 +1,69 @@
+server:
+  port: 8081
+  contextPath: /exp-account-service
+---
+spring:
+  profiles: local,default,test
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    org.springframework: DEBUG
+    aug.manas.expmgr.accountservice: DEBUG
+    org.hibernate: DEBUG
+datasource:
+  exp-mgr:
+    url: jdbc:h2:mem:exp-mgr
+    username: SA
+    password:
+    driverClassName: org.h2.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+---
+spring:
+  profiles: dev
+logging:
+  level:
+    org.springframework: INFO
+    aug.manas.expmgr.accountservice: DEBUG
+    org.hibernate: INFO
+datasource:
+  exp-mgr:
+    url: jdbc:mysql://localhost:3306/expense_manager
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+---
+spring:
+  profiles: prod
+logging:
+  level:
+    org.springframework: INFO
+    aug.manas.expmgr.accountservice: ERROR
+    org.hibernate: INFO
+datasource:
+  exp-mgr:
+    url: jdbc:mysql://localhost:3306/expense_manager
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: create-drop  #this is just for the demo with CapOne.
+      show_sql: false
+      format_sql: false
+      dialect: org.hibernate.dialect.MySQLDialect
