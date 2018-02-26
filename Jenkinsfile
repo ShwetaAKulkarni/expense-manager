@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools { 
-        maven 'maven_3.3.9' 
+        maven 'maven_3.5.0' 
     }
     stages {
         stage ('Initialize') {
