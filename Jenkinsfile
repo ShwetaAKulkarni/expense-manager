@@ -46,7 +46,6 @@ pipeline {
                 sh "rm -rf /tmp/exp/*"
                 sh "cp /Users/shweta/.jenkins/workspace/expense-manager/exp-account-service/target/exp-account-service-0.0.1-SNAPSHOT-distribution.zip /tmp/exp/"
                 sh "cp /Users/shweta/.jenkins/workspace/expense-manager/exp-client/target/exp-client-0.0.1-SNAPSHOT-distribution.zip /tmp/exp/"
-                sh "cd /tmp/exp"
                 sh "unzip -o /tmp/exp/exp-account-service-0.0.1-SNAPSHOT-distribution.zip -d /tmp/exp/"
                 sh "unzip -o /tmp/exp/exp-client-0.0.1-SNAPSHOT-distribution.zip -d /tmp/exp/"
                 sh "chmod -R +x /tmp/exp/exp-*/run*.sh"
@@ -56,8 +55,9 @@ pipeline {
         stage ('Run') {
             steps {
                 echo 'This is run phase.'
-                sh "nohup /bin/bash /tmp/exp/exp-account-service-0.0.1-SNAPSHOT/run-account-service.sh > /tmp/service.log"
-                sh "nohup /bin/bash /tmp/exp/exp-client-0.0.1-SNAPSHOT/run-client.sh > /tmp/client.log"
+                sh "cd /tmp/exp"
+                sh "nohup /tmp/exp/exp-account-service-0.0.1-SNAPSHOT/run-account-service.sh > /tmp/service.log 2>&1 &"
+                sh "nohup /tmp/exp/exp-client-0.0.1-SNAPSHOT/run-client.sh > /tmp/client.log 2>&1 &"
             }
         }
 
