@@ -32,5 +32,22 @@ pipeline {
             }
         }
 
+        stage ('Package') {
+
+            steps {
+                echo 'This is package phase.'
+                sh "${M2_HOME}/bin/mvn clean package -Dmaven.test.skip=true"
+                sh "rm -rf /tmp/exp/*"
+                sh "cp /Users/shweta/.jenkins/workspace/expense-manager/exp-account-service/target/exp-account-service-0.0.1-SNAPSHOT-distribution.zip /tmp/exp/"
+                sh "cp /Users/shweta/.jenkins/workspace/expense-manager/exp-client/target/exp-client-0.0.1-SNAPSHOT-distribution.zip /tmp/exp/"
+                sh "cd /tmp/exp"
+                sh "unzip -o /tmp/exp/exp-account-service-0.0.1-SNAPSHOT-distribution.zip -d /tmp/exp/"
+                sh "unzip -o /tmp/exp/exp-client-0.0.1-SNAPSHOT-distribution.zip -d /tmp/exp/"
+                sh "chmod -R +x /tmp/exp/exp-*/run*.sh"
+                sh "/tmp/exp/exp-account-service-0.0.1-SNAPSHOT/run-account-service.sh"
+                sh "/tmp/exp/exp-client-0.0.1-SNAPSHOT/run-client.sh"
+            }
+        }
+
     }
 }
