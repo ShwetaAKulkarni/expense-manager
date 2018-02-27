@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                git([url: 'https://github.com/ShwetaAKulkarni/expense-manager'])
+                //git([url: 'https://github.com/ShwetaAKulkarni/expense-manager'])
                 //def mvnHome = tool 'maven_3.3.9'
                 sh '''
                     echo "PATH = ${PATH}"
