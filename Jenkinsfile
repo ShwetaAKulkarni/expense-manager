@@ -56,8 +56,8 @@ pipeline {
             steps {
                 echo 'This is run phase.'
                 sh "cd /tmp/exp"
-                sh "nohup /tmp/exp/exp-account-service-0.0.1-SNAPSHOT/run-account-service.sh > /tmp/service.log 2>&1 &"
-                sh "nohup /tmp/exp/exp-client-0.0.1-SNAPSHOT/run-client.sh > /tmp/client.log 2>&1 &"
+                sh "/tmp/exp/exp-account-service-0.0.1-SNAPSHOT/run-account-service.sh"
+                sh "/tmp/exp/exp-client-0.0.1-SNAPSHOT/run-client.sh"
             }
         }
 
