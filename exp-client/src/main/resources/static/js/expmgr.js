@@ -60,7 +60,7 @@ app.controller('expmgrCtrl',  function($scope, $uibModal, transactionService){
 	            fontFamily: "Verdana",
 	            fontWeight: "100"
 	        },
-	        type: "pie",
+	        type: "vbar",
 	        backgroundColor: "black",
 
 	        legend: {
@@ -76,14 +76,9 @@ app.controller('expmgrCtrl',  function($scope, $uibModal, transactionService){
 	            text: "%v CAD$"
 	        },
 	        plot: {
-	            refAngle: "-90",
-	            borderWidth: "0px",
-	            valueBox: {
-	                placement: "in",
-	                text: "%npv %",
-	                fontSize: "15px",
-	                textAlpha: 20,
-	            }
+	        	barWidth: "50px",
+	        	barSpace: "75px",
+	        	borderWidth: "0px",
 	        },
 	        series: [
 	        	{		text: 'INCOME',
