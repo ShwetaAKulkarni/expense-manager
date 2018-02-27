@@ -20,7 +20,7 @@ pipeline {
 
             steps {
                 echo 'This is build phase.'
-                sh "mvn clean compile"
+                sh "${M2_HOME}/bin/mvn clean compile"
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
 
             steps {
                 echo 'This is test phase.'
-				  sh "${M2_HOME}/bin/mvn clean test"
+				  sh "${M2_HOME}/bin/mvn clean test verify"
             }
         }
 
